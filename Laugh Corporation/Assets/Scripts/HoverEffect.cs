@@ -24,6 +24,12 @@ public class HoverEffect : MonoBehaviour
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
             {
                 selectedObject = hit.collider.gameObject;
+
+                if (selectedObject.CompareTag("Tablet"))
+                {
+                    HandleTabletObject();
+                    return;
+                }
             }
         }
         else if (Input.GetMouseButtonUp(0))
@@ -31,7 +37,7 @@ public class HoverEffect : MonoBehaviour
             selectedObject = null;
         }
 
-        if (selectedObject != null)
+        if (selectedObject != null && !selectedObject.CompareTag("Tablet"))
         {
             MoveObject(selectedObject, ray);
         }
@@ -75,5 +81,10 @@ public class HoverEffect : MonoBehaviour
         {
             obj.transform.parent.position = ray.GetPoint(distance);
         }
+    }
+
+    void HandleTabletObject()
+    {
+        Debug.Log("Tablet");
     }
 }
