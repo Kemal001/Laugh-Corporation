@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class HoverEffect : MonoBehaviour
@@ -8,6 +9,12 @@ public class HoverEffect : MonoBehaviour
     private GameObject selectedObject = null;
     private GameObject lastHoveredObject = null;
     private Camera mainCamera;
+
+    [SerializeField] private Transform tabletTransform;
+    [SerializeField] private Transform tabletStartPosition;
+    [SerializeField] private Transform tabletEndPosition;
+    [SerializeField] private float animTime;
+    private bool tabletIsActive = false;
 
     void Start()
     {
@@ -85,6 +92,17 @@ public class HoverEffect : MonoBehaviour
 
     void HandleTabletObject()
     {
-        Debug.Log("Tablet");
+        if (!tabletIsActive)
+        {
+            tabletTransform.DOMove(tabletEndPosition.position, animTime);
+            tabletTransform.DORotate(tabletEndPosition.eulerAngles, animTime);
+        }
+        else
+        {
+            tabletTransform.DOMove(tabletStartPosition.position, animTime);
+            tabletTransform.DORotate(tabletStartPosition.eulerAngles, animTime);
+        }
+
+        tabletIsActive = !tabletIsActive;
     }
 }
