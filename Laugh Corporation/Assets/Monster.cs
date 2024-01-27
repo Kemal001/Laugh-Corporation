@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Monster : MonoBehaviour
@@ -35,13 +33,11 @@ public class Monster : MonoBehaviour
                 OnFarFromTarget();
             }
 
-            // Check if the mouse button is pressed
             if (Input.GetMouseButtonDown(0))
             {
                 isDragging = true;
             }
 
-            // Check if the mouse button is released
             if (isDragging && Input.GetMouseButtonUp(0))
             {
                 isDragging = false;
@@ -62,10 +58,11 @@ public class Monster : MonoBehaviour
         if (clonedObject == null)
         {
             clonedObject = Instantiate(transform.parent.gameObject,
-                new Vector3(spawnPoint.position.x, spawnPoint.position.y - 1f, spawnPoint.position.z),
+                new Vector3(spawnPoint.position.x, spawnPoint.position.y - 1.5f, spawnPoint.position.z),
                 Quaternion.identity);
 
             clonedObject.transform.localScale = Vector3.one;
+
             Debug.Log("Object is near the target.");
         }
     }
