@@ -62,6 +62,7 @@ public class Monster : MonoBehaviour
                 Quaternion.identity);
 
             clonedObject.transform.localScale = Vector3.one;
+            clonedObject.GetComponentInChildren<BoxCollider>().enabled = false;
 
             Debug.Log("Object is near the target.");
         }
