@@ -38,7 +38,7 @@ namespace Runtime
         private void Start()
         {
             isRunnig = true;
-            PlayerPrefs.DeleteAll();
+            //PlayerPrefs.DeleteAll();
             levelNumber = PlayerPrefs.GetInt("Level", 0);
             Debug.Log(levelNumber);
 
