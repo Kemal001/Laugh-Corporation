@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Runtime;
 using UnityEngine;
 
 namespace Data
@@ -10,6 +11,7 @@ namespace Data
         public Sprite Icon;
         public string Name;
         public List<Statistic> StatsList;
+        public MonsterName MonsterName;
     }
 
     [Serializable]
