@@ -10,15 +10,18 @@ namespace UI
     {
         [SerializeField] private GameObject mainMenu;
         [SerializeField] private GameObject credits;
+        [SerializeField] private GameObject tutorial;
         
         
         [SerializeField] private TextMeshProUGUI startLevelButtonText;
         
         [SerializeField] private Button startLevelButton;
+        [SerializeField] private Button tutorialButton;
         [SerializeField] private Button creditsButton;
         [SerializeField] private Button exitButton;
         [SerializeField] private Button restartProgress;
         [SerializeField] private Button closeCreditsButton;
+        [SerializeField] private Button closeTutorialButton;
 
         [SerializeField] private AudioSource audioSource;
 
@@ -37,7 +40,9 @@ namespace UI
             creditsButton.onClick.AddListener(Credits);
             exitButton.onClick.AddListener(Exit);
             creditsButton.onClick.AddListener(Credits);
+            tutorialButton.onClick.AddListener(Tutorial);
             closeCreditsButton.onClick.AddListener(CloseCreditsButton);
+            closeTutorialButton.onClick.AddListener(CloseTutorialButton);
         }
 
         private void StartLevel()
@@ -54,6 +59,16 @@ namespace UI
             credits.SetActive(true);
             
             closeCreditsButton.gameObject.SetActive(true);
+        }
+        
+        private void Tutorial()
+        {
+            audioSource.Play();
+            
+            mainMenu.SetActive(false);
+            tutorial.SetActive(true);
+            
+            closeTutorialButton.gameObject.SetActive(true);
         }
         private void Exit()
         {
@@ -76,6 +91,16 @@ namespace UI
             credits.SetActive(false);
             
             closeCreditsButton.gameObject.SetActive(false);
+        }
+        
+        private void CloseTutorialButton()
+        {
+            audioSource.Play();
+
+            mainMenu.SetActive(true);
+            tutorial.SetActive(false);
+            
+            closeTutorialButton.gameObject.SetActive(false);
         }
     }
 }
