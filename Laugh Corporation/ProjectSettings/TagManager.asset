@@ -7,6 +7,7 @@ TagManager:
   - Tablet
   - Portal
   - Red Button
+  - Pause Menu
   layers:
   - Default
   - TransparentFX

@@ -1,3 +1,4 @@
+using Runtime;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -5,9 +6,9 @@ using UnityEngine.UI;
 
 namespace UI
 {
-    public class LoseGameUI : MonoBehaviour
+    public class PauseMenuUI : MonoBehaviour
     {
-        public static LoseGameUI Instance;
+        public static PauseMenuUI Instance;
 
         private void Awake()
         {
@@ -18,23 +19,29 @@ namespace UI
         }
 
         [SerializeField] private GameObject window;
-        [SerializeField] private Button restartLevelButton;
+        [SerializeField] private Button resumeButton;
         [SerializeField] private Button mainMenuButton;
 
         public void OpenWindow()
         {
-            AudioSystem.Instance.PlayAntiLaughSound();
+            AudioSystem.Instance.PlayClickSound();
             
-            restartLevelButton.onClick.AddListener(RestartLeveL);
+            resumeButton.onClick.AddListener(Resume);
             mainMenuButton.onClick.AddListener(MainMenu);
             
             window.SetActive(true);
         }
 
-        private void RestartLeveL()
+        private void Resume()
         {
             AudioSystem.Instance.PlayButtonSound();
-            SceneManager.LoadScene("MapScene");
+            
+            StateMachine.Instance.isRunnig = true;
+            
+            resumeButton.onClick.RemoveListener(Resume);
+            mainMenuButton.onClick.RemoveListener(MainMenu);
+            
+            window.SetActive(false);
         }
         
         private void MainMenu()

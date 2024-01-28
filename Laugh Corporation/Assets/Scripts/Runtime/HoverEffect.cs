@@ -1,5 +1,6 @@
 using DG.Tweening;
 using Runtime;
+using UI;
 using UnityEngine;
 
 public class HoverEffect : MonoBehaviour
@@ -44,6 +45,11 @@ public class HoverEffect : MonoBehaviour
                     HandleRedButtonObject();
                     return;
                 }
+                if (selectedObject.CompareTag("Pause Menu"))
+                {
+                    HandlePauseMenuObject();
+                    return;
+                }
             }
         }
         else if (Input.GetMouseButtonUp(0))
@@ -51,7 +57,7 @@ public class HoverEffect : MonoBehaviour
             selectedObject = null;
         }
 
-        if (selectedObject != null && !selectedObject.CompareTag("Tablet") && !selectedObject.CompareTag("Red Button"))
+        if (selectedObject != null && !selectedObject.CompareTag("Tablet") && !selectedObject.CompareTag("Red Button") && !selectedObject.CompareTag("Pause Menu"))
         {
             MoveObject(selectedObject, ray);
         }
@@ -99,6 +105,8 @@ public class HoverEffect : MonoBehaviour
 
     void HandleTabletObject()
     {
+        AudioSystem.Instance.PlayTabletSound();
+        
         if (!tabletIsActive)
         {
             tabletTransform.DOMove(tabletEndPosition.position, animTime);
@@ -112,8 +120,15 @@ public class HoverEffect : MonoBehaviour
 
         tabletIsActive = !tabletIsActive;
     }
-    void HandleRedButtonObject()
+    private void HandleRedButtonObject()
     {
+        AudioSystem.Instance.PlayClickSound();
         StateMachine.Instance.ChooseMonster();
+    }
+    private void HandlePauseMenuObject()
+    {
+        AudioSystem.Instance.PlayClickSound();
+        StateMachine.Instance.isRunnig = false;
+        PauseMenuUI.Instance.OpenWindow();
     }
 }

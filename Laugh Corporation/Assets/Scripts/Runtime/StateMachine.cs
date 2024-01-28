@@ -38,9 +38,7 @@ namespace Runtime
         private void Start()
         {
             isRunnig = true;
-            //PlayerPrefs.DeleteAll();
             levelNumber = PlayerPrefs.GetInt("Level", 0);
-            Debug.Log(levelNumber);
 
             currentLevelKids = levelsDatabase.Levels[levelNumber].ChildDatas;
             levelKidNumber = 0;
@@ -86,11 +84,11 @@ namespace Runtime
             {
                 LaughFuel += 0.17f;
                 LaughFuelUI.Instance.UpdateUI();
+                AudioSystem.Instance.PlayLaughSound();
             }
             else
             {
-                //TODO Show Wrong Monster
-                Debug.Log("Wrong");
+                AudioSystem.Instance.PlayAntiLaughSound();
             }
 
             ChangeKid();

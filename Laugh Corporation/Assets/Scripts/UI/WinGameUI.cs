@@ -25,6 +25,8 @@ namespace UI
 
         public void OpenWindow(float LaughFuelValue)
         {
+            AudioSystem.Instance.PlayYesSound();
+            
             var currentLevel = PlayerPrefs.GetInt("Level");
 
             if (LaughFuelValue > 0.9)
@@ -46,11 +48,13 @@ namespace UI
 
         private void NextLeveL()
         {
+            AudioSystem.Instance.PlayButtonSound();
             SceneManager.LoadScene("MapScene");
         }
         
         private void MainMenu()
         {
+            AudioSystem.Instance.PlayButtonSound();
             SceneManager.LoadScene("MainMenu");
         }
     }
