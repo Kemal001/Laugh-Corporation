@@ -17,12 +17,14 @@ namespace Runtime
             else
                 Instance = this;
         }
+        
         [HideInInspector]
         public MonsterName currentMonsterName;
         [HideInInspector]
         public ChildData currentKid;
 
         public Action onMonsterChanged;
+        public bool isRunnig = true;
         
         [SerializeField] private LevelsDatabase levelsDatabase;
         [SerializeField] private List<MonsterDataDictionary> monsterDatas;
@@ -35,6 +37,7 @@ namespace Runtime
 
         private void Start()
         {
+            isRunnig = true;
             PlayerPrefs.DeleteAll();
             levelNumber = PlayerPrefs.GetInt("Level", 0);
             Debug.Log(levelNumber);
@@ -47,14 +50,14 @@ namespace Runtime
 
         public void LoseGame()
         {
-            Debug.Log("FUCKING LOSER, DIE GROSS");
+            LoseGameUI.Instance.OpenWindow();
         }
         
         public void WinGame()
         {
             var nextLevel = levelNumber + 1;
             PlayerPrefs.SetInt("Level",nextLevel);
-            Debug.Log("WIN");
+            WinGameUI.Instance.OpenWindow(LaughFuel);
         }
         
         public void ChangeKid()
@@ -95,6 +98,7 @@ namespace Runtime
 
         private void WinOrLose()
         {
+            isRunnig = false;
             if (LaughFuel >= 0.65)
             {
                 WinGame();

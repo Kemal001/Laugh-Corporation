@@ -26,6 +26,9 @@ namespace Runtime
 
         void Update()
         {
+            if(!StateMachine.Instance.isRunnig)
+                return;
+            
             if (targetObject != null)
             {
                 float distance = Vector3.Distance(transform.position, targetObject.transform.position);

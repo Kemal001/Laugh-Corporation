@@ -22,6 +22,9 @@ public class HoverEffect : MonoBehaviour
 
     void Update()
     {
+        if(!StateMachine.Instance.isRunnig)
+            return;
+        
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
